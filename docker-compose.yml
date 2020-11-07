@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  snikket:
+    container_name: snikket
+    image: snikket/snikket:alpha
+    env_file: snikket.conf
+    restart: unless-stopped
+    networks:
+      - nginx_net
+    volumes:
+      - ${CERTBOT_CONF}:/etc/letsencrypt
+      - ${CERTBOT_CONF}/live/angsto-tech.com:/etc/letsencrypt/live/chat.angsto-tech.com
+      - ${CERTBOT_CONF}/live/angsto-tech.com:/etc/letsencrypt/live/groups.chat.angsto-tech.com
+      - ${CERTBOT_CONF}/live/angsto-tech.com:/etc/letsencrypt/live/share.chat.angsto-tech.com
+      - ./entrypoint.sh:/bin/entrypoint.sh
+      - ./supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+    ports:
+      - 5222:5222
+      - 5269:5269
+
+networks:
+  nginx_net:
+    name: nginx_net
