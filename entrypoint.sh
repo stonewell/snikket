@@ -51,6 +51,6 @@ prosodyctl --root cert import /etc/letsencrypt/live
 # Generate trust proxy
 nginx_ip=$(host -4 nginx|cut -d ' ' -f 4-)
 
-echo "trusted_proxies = { \"${nginx_ip}\", }" > /snikket/prosody/trusted_proxy.cfg.lua
+echo "trusted_proxies={\"${nginx_ip}\"}" > /snikket/prosody/trusted_proxy.cfg.lua
 
 exec supervisord -c /etc/supervisor/supervisord.conf
