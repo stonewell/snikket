@@ -15,6 +15,8 @@ services:
       - ${CERTBOT_CONF}/live/angsto-tech.com:/etc/letsencrypt/live/share.chat.angsto-tech.com
       - ./entrypoint.sh:/bin/entrypoint.sh
       - ./supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+      - ${HOME}/data/snikket:/snikket
+      - ./prosody.cfg.lua:/etc/prosody/prosody.cfg.lua
     ports:
       - 5222:5222
       - 5269:5269
